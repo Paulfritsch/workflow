@@ -1,16 +1,20 @@
-name: Scheduled Job
+name: Cron Job
 
 on:
   schedule:
-    - cron: "0 0 * * *" # Jeden Tag um 10:45 UTC
+    - - cron: "*/2 * * * *"  # Dies ist die Cron-Syntax (z.B. jede Stunde)
+  workflow_dispatch:  # Optional: Ermöglicht das manuelle Auslösen des Workflows
 
 jobs:
-  run-script:
+  run-cronjob:
     runs-on: ubuntu-latest
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v4
 
-      - name: Run a script
-        run: echo "Hallo! Dies ist ein geplanter Cron-Job."
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Führe Cronjob aus
+        run: |
+          echo "Cronjob läuft!"
+          # Hier kannst du das Skript oder den Befehl einfügen, der ausgeführt werden soll
 
